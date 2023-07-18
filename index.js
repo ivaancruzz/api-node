@@ -13,22 +13,22 @@ app.post("/compuya", async (req, res) => {
   console.log(body)
   console.log(body.Message)
 
-  if (
-    body.Message === "Volver" ||
-    body.Message === "Salir" ||
-    body.Message === "Consultar"
-  ) {
-    return res.send(
-      JSON.stringify({
-        Message: "",
-        Type: 4,
-        TypeUrl: null,
-        Action: 0,
-        Tags: [],
-        Note: "",
-      })
-    )
-  }
+  //   if (
+  //     body.Message === "Volver" ||
+  //     body.Message === "Salir" ||
+  //     body.Message === "Consultar"
+  //   ) {
+  //     return res.send(
+  //       JSON.stringify({
+  //         Message: "",
+  //         Type: 4,
+  //         TypeUrl: null,
+  //         Action: 0,
+  //         Tags: [],
+  //         Note: "",
+  //       })
+  //     )
+  //   }
 
   if (body.Message === "a") {
     const products = await api.getProducts()
