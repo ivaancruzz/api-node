@@ -25,7 +25,7 @@ app.post("/compuya", async (req, res) => {
     if (body.Message === "Volver") {
       app.locals.viewProducts = true
     }
-    res.send(
+    return res.send(
       JSON.stringify({
         Message: "",
         Type: 4,
@@ -35,8 +35,6 @@ app.post("/compuya", async (req, res) => {
         Note: "",
       })
     )
-
-    return
   }
 
   if (body.Message === "a" && !app.locals.viewProducts) {
@@ -47,13 +45,13 @@ app.post("/compuya", async (req, res) => {
 
   if (app.locals.viewProducts) {
     const products = await api.getProducts()
-    res.send(sendMessageAllProducts(products))
+    return res.send(sendMessageAllProducts(products))
   } else {
     const regex = /^[0-9]*$/
     const isNumber = regex.test(body.Message)
 
     if (!isNumber) {
-      res.send(
+      return res.send(
         JSON.stringify({
           Message: "La opción no es válida. Ingrese el número correcto.",
           Type: 4,
@@ -63,17 +61,15 @@ app.post("/compuya", async (req, res) => {
           Note: "",
         })
       )
-
-      return
     }
 
     const product = await api.getProduct(body.Message)
 
-    res.send(viewProduct(product))
+    return res.send(viewProduct(product))
   }
 })
 
-function sendMessageAllProducts(products, res) {
+function sendMessageAllProducts(products) {
   let displayMessage = "✨Catálogo de ProductosYa.com - Actualizado 2023✨\n\n"
   products.forEach((product, index) => {
     displayMessage += `${product.title}\n${product.description}\nPrecio: 💲${product.price}\n\n👉Responde: ${index} para ver más\n\n\n`
