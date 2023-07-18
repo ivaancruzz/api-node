@@ -8,11 +8,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-app.locals.viewProducts = false
-
 app.post("/compuya", async (req, res) => {
-  app.locals.viewProducts = false
-
   const body = req.body
   console.log(body)
   console.log(body.Message)
@@ -22,9 +18,6 @@ app.post("/compuya", async (req, res) => {
     body.Message === "Salir" ||
     body.Message === "Consultar"
   ) {
-    if (body.Message === "Volver") {
-      app.locals.viewProducts = true
-    }
     return res.send(
       JSON.stringify({
         Message: "",
@@ -37,13 +30,7 @@ app.post("/compuya", async (req, res) => {
     )
   }
 
-  if (body.Message === "a" && !app.locals.viewProducts) {
-    app.locals.viewProducts = true
-  } else {
-    app.locals.viewProducts = false
-  }
-
-  if (app.locals.viewProducts) {
+  if (body.Message === "a") {
     const products = await api.getProducts()
     return res.send(sendMessageAllProducts(products))
   } else {
