@@ -4,7 +4,8 @@ const port = 3000
 app.use(express.json())
 
 app.post("/compuya", (req, res) => {
-  console.log(req.body)
+  console.log(req)
+  console.log(res)
   res.send(
     JSON.stringify({
       Message: "Mensaje que se enviará al contacto",
