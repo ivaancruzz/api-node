@@ -6,6 +6,7 @@ app.use(express.json())
 
 app.post("/compuya", async (req, res) => {
   const body = req.body
+  console.log(body)
 
   const products = await getProducts()
 
@@ -33,7 +34,11 @@ async function getProducts() {
 function sendMessageAllProducts(products, res) {
   let displayMessage = ""
   products.forEach((product, index) => {
-    displayMessage += `${product.title}\n${product.description}\nPrecio: ${product.price}\n\nResponde: ${index} para ver más\n\n\n`
+    displayMessage += `${product.title.bold()}\n${
+      product.description
+    }\nPrecio: 💲${product.price.toString().bold()}\n\n👉Responde: ${index
+      .toString()
+      .bold()} para ver más\n\n\n`
   })
   return JSON.stringify({
     Message: displayMessage,
