@@ -13,11 +13,12 @@ app.locals.isFirstCall = false
 app.post("/compuya", async (req, res) => {
   const body = req.body
   console.log(body)
+  console.log(body.Message)
 
   if (
-    body.message === "Volver" ||
-    body.message === "Salir" ||
-    body.message === "Consultar"
+    body.Message === "Volver" ||
+    body.Message === "Salir" ||
+    body.Message === "Consultar"
   ) {
     res.send(
       JSON.stringify({
@@ -33,7 +34,7 @@ app.post("/compuya", async (req, res) => {
     return
   }
 
-  if (body.message == "a" && !app.locals.isFirstCall) {
+  if (body.Message == "a" && !app.locals.isFirstCall) {
     app.locals.isFirstCall = true
   } else {
     app.locals.isFirstCall = false
@@ -44,7 +45,7 @@ app.post("/compuya", async (req, res) => {
     res.send(sendMessageAllProducts(products))
   } else {
     const regex = /^[0-9]*$/
-    const isNumber = regex.test(body.message)
+    const isNumber = regex.test(body.Message)
 
     if (!isNumber) {
       res.send(
@@ -61,7 +62,7 @@ app.post("/compuya", async (req, res) => {
       return
     }
 
-    const product = await api.getProduct(body.message)
+    const product = await api.getProduct(body.Message)
 
     res.send(viewProduct(product))
   }
@@ -85,7 +86,7 @@ function sendMessageAllProducts(products, res) {
 }
 
 function viewProduct(product) {
-  const notFound = product["message"]
+  const notFound = product["Message"]
 
   if (notFound) {
     return JSON.stringify({
