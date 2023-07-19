@@ -11,8 +11,8 @@ app.post("/", async (req, res) => {
 
   // await flow.startFlow(res, body)
 
-  res.send(test.testSendImage())
-  // res.send(test.testSendVideo())
+  // res.send(test.testSendImage())
+  res.send(test.testSendVideo())
   // res.send(test.testSendAudio())
   // res.send(test.testSendFile())
   // res.send(test.testSendText())
