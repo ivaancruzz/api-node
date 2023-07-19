@@ -34,6 +34,8 @@ app.post("/compuya", async (req, res) => {
     const products = await api.getProducts()
     return res.send(sendMessageAllProducts(products))
   } else {
+    console.log(body.Message, "AQUIIIIIII")
+
     const regex = /^[0-9]*$/
     const isNumber = regex.test(body.Message)
 
