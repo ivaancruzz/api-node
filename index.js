@@ -32,7 +32,8 @@ app.post("/compuya", async (req, res) => {
 
   if (body.Message === "a") {
     const products = await api.getProducts()
-    return res.send(sendMessageAllProducts(products))
+    const message = sendMessageAllProducts(products)
+    return res.send(message)
   } else {
     console.log(body.Message, "AQUIIIIIII")
 
