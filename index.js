@@ -4,13 +4,8 @@ const app = express()
 const port = 3000
 app.use(express.json())
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
 app.post("/compuya", async (req, res) => {
   const body = req.body
-  console.log(body)
   console.log(body.Message)
 
   //   if (
@@ -100,3 +95,7 @@ function viewProduct(product) {
     Note: "",
   })
 }
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
