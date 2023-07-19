@@ -11,17 +11,17 @@ app.post("/", async (req, res) => {
 
   // await flow.startFlow(res, body)
 
-  test.testSendImage(res)
-  // test.testSendVideo(res)
-  // test.testSendAudio(res)
-  // test.testSendFile(res)
-  // test.testSendText(res)
-  // test.testActionContinue(res)
-  // test.testActionWait(res)
-  // test.testActionAssignOperator(res)
-  // test.testActionEndConversation(res)
-  // test.testTags(res)
-  // test.testNote(res)
+  res.send(test.testSendImage())
+  // res.send(test.testSendVideo())
+  // res.send(test.testSendAudio())
+  // res.send(test.testSendFile())
+  // res.send(test.testSendText())
+  // res.send(test.testActionContinue())
+  // res.send(test.testActionWait())
+  // res.send(test.testActionAssignOperator())
+  // res.send(test.testActionEndConversation())
+  // res.send(test.testTags())
+  // res.send(test.testNote())
 })
 
 app.listen(port, () => {
