@@ -29,6 +29,17 @@ async function startFlow(res, bodyResponse) {
         note: "",
       })
     )
+  } else if (bodyResponse.message.toLowerCase() === "Operador") {
+    return res.send(
+      JSON.stringify({
+        message: "Entiendo. Te voy a derivar.",
+        type: 4,
+        typeUrl: null,
+        action: 0,
+        tags: [],
+        note: "",
+      })
+    )
   } else {
     const regex = /^[0-9]*$/
     const isNumber = regex.test(bodyResponse.message)
@@ -55,7 +66,9 @@ async function startFlow(res, bodyResponse) {
 function sendMessageAllProducts(products) {
   let displayMessage = "✨Catálogo de ProductosYa.com - Actualizado 2023✨\n\n"
   products.forEach((product, index) => {
-    displayMessage += `${product.title}\n${product.description}\nPrecio: 💲${product.price}\n\n👉Responde: ${index} para ver más\n\n\n`
+    displayMessage += `${product.title}\n${product.description}\nPrecio: 💲${
+      product.price
+    }\n\n👉Responde: ${index + 1} para ver más\n\n\n`
   })
 
   displayMessage += "Para volver escribe: Salir"
