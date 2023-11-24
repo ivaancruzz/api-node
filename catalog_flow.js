@@ -1,27 +1,27 @@
 const api = require("./calls")
 
 async function startFlow(res, bodyResponse) {
-  if (bodyResponse.Message === "a") {
+  if (bodyResponse.message === "a") {
     const products = await api.getProducts()
     return res.send(sendMessageAllProducts(products))
   } else {
     const regex = /^[0-9]*$/
-    const isNumber = regex.test(bodyResponse.Message)
+    const isNumber = regex.test(bodyResponse.message)
 
     if (!isNumber) {
       return res.send(
         JSON.stringify({
-          Message: "La opción no es válida. Ingrese el número correcto.",
-          Type: 4,
-          TypeUrl: null,
-          Action: 1,
-          Tags: [],
-          Note: "",
+          message: "La opción no es válida. Ingrese el número correcto.",
+          type: 4,
+          typeUrl: null,
+          tction: 1,
+          tags: [],
+          note: "",
         })
       )
     }
 
-    const product = await api.getProduct(bodyResponse.Message)
+    const product = await api.getProduct(bodyResponse.message)
 
     return res.send(viewProduct(product))
   }
@@ -35,12 +35,12 @@ function sendMessageAllProducts(products) {
 
   displayMessage += "Para volver escribe: Salir"
   return JSON.stringify({
-    Message: displayMessage,
-    Type: 4,
-    TypeUrl: null,
-    Action: 1,
-    Tags: [],
-    Note: "",
+    message: displayMessage,
+    type: 4,
+    typeUrl: null,
+    action: 1,
+    tags: [],
+    note: "",
   })
 }
 
@@ -49,23 +49,23 @@ function viewProduct(product) {
 
   if (notFound) {
     return JSON.stringify({
-      Message:
+      message:
         "El producto que intenta ver no existe 🤷‍♂️.\n\nVea las opciones nuevamente y responda con el número adecuado 🙏",
-      Type: 4,
-      TypeUrl: null,
-      Action: 1,
-      Tags: [],
-      Note: "",
+      type: 4,
+      typeUrl: null,
+      action: 1,
+      tags: [],
+      note: "",
     })
   }
 
   return JSON.stringify({
-    Message: `${product.title}\n${product.description}\nPrecio: 💲${product.price}\n\nEscribe 'Volver' si quieres ver los productos nuevamente\n\nEscribe 'Consultar' para que un asesor te contacte\n\n\n`,
-    Type: 0,
-    TypeUrl: product.thumbnail,
-    Action: 1,
-    Tags: [],
-    Note: "",
+    message: `${product.title}\n${product.description}\nPrecio: 💲${product.price}\n\nEscribe 'Volver' si quieres ver los productos nuevamente\n\nEscribe 'Consultar' para que un asesor te contacte\n\n\n`,
+    type: 0,
+    typeUrl: product.thumbnail,
+    action: 1,
+    tags: [],
+    note: "",
   })
 }
 
