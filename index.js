@@ -9,7 +9,7 @@ app.use(express.json())
 app.post("/", async (req, res) => {
   const body = req.body
 
-  // await flow.startFlow(res, body)
+  await flow.startFlow(res, body)
 
   // res.send(test.testSendImage())
   // res.send(test.testSendVideo())
@@ -17,7 +17,7 @@ app.post("/", async (req, res) => {
   // res.send(test.testSendFile())
   // res.send(test.testSendText())
   // res.send(test.testActionContinue())
-  res.send(test.testActionWait())
+  // res.send(test.testActionWait())
   // res.send(test.testActionAssignOperator())
   // res.send(test.testActionEndConversation())
   // res.send(test.testTags())
