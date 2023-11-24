@@ -1,10 +1,13 @@
 const api = require("./calls")
 
 async function startFlow(res, bodyResponse) {
-  if (bodyResponse.message === "a") {
+  if (
+    bodyResponse.message.toLowerCase() === "a" ||
+    bodyResponse.message.toLowerCase() === "volver"
+  ) {
     const products = await api.getProducts()
     return res.send(sendMessageAllProducts(products))
-  } else if( bodyResponse.message === "next" ){
+  } else if (bodyResponse.message.toLowerCase() === "next") {
     return res.send(
       JSON.stringify({
         message: "Enviando al siguiente nodo...",
@@ -12,6 +15,17 @@ async function startFlow(res, bodyResponse) {
         typeUrl: null,
         action: 0,
         tags: [],
+        note: "",
+      })
+    )
+  } else if (bodyResponse.message.toLowerCase() === "consultar") {
+    return res.send(
+      JSON.stringify({
+        message: "Entiendo. Te derivo con un operador.",
+        type: 4,
+        typeUrl: null,
+        action: 4,
+        tags: ["4121fcab-fd8a-ee11-8925-6045bda98175"], //Tag "interés"
         note: "",
       })
     )
@@ -71,12 +85,12 @@ function viewProduct(product) {
   }
 
   return JSON.stringify({
-    message: `${product.title}\n${product.description}\nPrecio: 💲${product.price}\n\nEscribe 'Volver' si quieres ver los productos nuevamente\n\nEscribe 'Consultar' para que un asesor te contacte\n\n\n`,
+    message: `${product.title}\n${product.description}\nPrecio: 💲${product.price}\n\nEscribe 'Volver' si quieres ver los productos nuevamente\n\nEscribe 'Consultar' para que un asesor te contacte`,
     type: 0,
     typeUrl: product.thumbnail,
     action: 1,
-    tags: [],
-    note: "",
+    tags: ["4121fcab-fd8a-ee11-8925-6045bda98175"], //Tag "interés"
+    note: `Consulta por ${product.title}`,
   })
 }
 
