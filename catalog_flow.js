@@ -4,6 +4,17 @@ async function startFlow(res, bodyResponse) {
   if (bodyResponse.message === "a") {
     const products = await api.getProducts()
     return res.send(sendMessageAllProducts(products))
+  } else if( bodyResponse.message === "next" ){
+    return res.send(
+      JSON.stringify({
+        message: "Enviando al siguiente nodo...",
+        type: 4,
+        typeUrl: null,
+        action: 0,
+        tags: [],
+        note: "",
+      })
+    )
   } else {
     const regex = /^[0-9]*$/
     const isNumber = regex.test(bodyResponse.message)
