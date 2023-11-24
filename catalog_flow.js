@@ -14,7 +14,7 @@ async function startFlow(res, bodyResponse) {
           message: "La opción no es válida. Ingrese el número correcto.",
           type: 4,
           typeUrl: null,
-          tction: 1,
+          action: 1,
           tags: [],
           note: "",
         })
